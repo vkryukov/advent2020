@@ -3,7 +3,8 @@ from math import *
 from itertools import *
 
 
-def read_integers(filename): return [int(x) for x in open(filename, 'r').read().split()]
+def read_words(filename): return [w for w in open(filename, 'r').read().split()]
+def read_integers(filename): return [int(w) for w in open(filename, 'r').read().split()]
 def read_lines(filename): return [s for s in open(filename).read().split('\n') if s != '']
 def count(iterable, fn=lambda x: x): return sum(fn(x) for x in iterable)
 
