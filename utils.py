@@ -7,6 +7,7 @@ def read_integers(filename): return [int(x) for x in open(filename, 'r').read().
 def read_lines(filename): return [s for s in open(filename).read().split('\n') if s != '']
 def count(iterable, fn=lambda x: x): return sum(fn(x) for x in iterable)
 
+
 # Arithmetic
 def prod(iterable):
     result = 1
