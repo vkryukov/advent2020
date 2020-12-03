@@ -2,6 +2,7 @@ from utils import *
 
 trees = read_lines('inputs/day03.txt')
 
+
 def value(line, i):
     i = i % len(line)
     return 1 if line[i] == '#' else 0
