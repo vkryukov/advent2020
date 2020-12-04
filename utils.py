@@ -1,8 +1,10 @@
 # Input utilities
 from math import *
 from itertools import *
+from collections import Counter, namedtuple, defaultdict
 import pickle
 import requests
+import typing
 
 
 def Input(n):
@@ -18,21 +20,9 @@ def Input(n):
 
 
 def read_words(n): return [w for w in Input(n).split()]
+
+
 def read_integers(n): return [int(w) for w in Input(n).split()]
-def read_lines(n): return [s for s in Input(n).split('\n') if s != '']
-def count(iterable, fn=lambda x: x): return sum(fn(x) for x in iterable)
-
-
-# Arithmetic
-def prod(iterable):
-    result = 1
-    for x in iterable:
-        result *= x
-    return result
-
-
-
-### Tests
 
 
 def test_read_integers():
@@ -42,5 +32,45 @@ def test_read_integers():
     assert len(num) == 200
 
 
+def read_lines(n): return [s for s in Input(n).split('\n') if s != '']
+
+
+def count(iterable, fn=lambda x: x): return sum(fn(x) for x in iterable)
+
+
+def prod(iterable):
+    result = 1
+    for x in iterable:
+        result *= x
+    return result
+
 def test_prod():
     assert prod(range(1, 10)) == factorial(9)
+
+
+def group_by(lst: typing.Iterable, /, key, sort_key=None) -> dict:
+    """Groups LST elements by the value of KEY, and returns a dictionary mapping the value of key
+    to all elements of LST with the given key. SORT_KEY, if set, sorts each of these lists."""
+    d = defaultdict(list)
+    for el in lst:
+        d[key(el)].append(el)
+    if sort_key:
+        for el in d:
+            d[el] = sorted(d[el], key=sort_key)
+    return dict(d)
+
+
+def test_group_by():
+    lst = range(10)
+    assert group_by(lst, key=lambda x: x % 2) == {0: [0, 2, 4, 6, 8], 1: [1, 3, 5, 7, 9]}
+    assert group_by(['mother', 'window', 'Mary', 'wash'], key=lambda s: s[0].lower()) == dict(
+        m=['mother', 'Mary'],
+        w=['window', 'wash']
+    )
+    assert group_by(['mother', 'wash', 'Mary', 'window'],
+                    key=lambda s: s[0].lower(),
+                    sort_key=len
+                    ) == dict(
+        m=['Mary', 'mother'],
+        w=['wash', 'window']
+    )
