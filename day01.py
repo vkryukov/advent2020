@@ -14,8 +14,8 @@ def test_n_with_sum():
 
 
 def test_part1():
-    assert n_with_sum(read_integers('inputs/day01.txt'), 2020, 2) == 1016964
+    assert n_with_sum(read_integers(1), 2020, 2) == 1016964
 
 
 def test_part2():
-    assert n_with_sum(read_integers('inputs/day01.txt'), 2020, 3) == 182588480
+    assert n_with_sum(read_integers(1), 2020, 3) == 182588480

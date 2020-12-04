@@ -1,11 +1,12 @@
 from utils import *
 
-trees = read_lines('inputs/day03.txt')
+trees = read_lines(3)
 
 
 def value(line, i):
     i = i % len(line)
     return 1 if line[i] == '#' else 0
+
 
 def calc(slope, step = 1):
     index = 0

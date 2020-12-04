@@ -20,8 +20,8 @@ def valid2(s):
 
 
 def test_part1():
-    assert count(read_lines('inputs/day02.txt'), valid) == 580
+    assert count(read_lines(2), valid) == 580
 
 
 def test_part2():
-    assert count(read_lines('inputs/day02.txt'), valid2) == 611
+    assert count(read_lines(2), valid2) == 611
