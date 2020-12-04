@@ -35,6 +35,9 @@ def test_read_integers():
 def read_lines(n): return [s for s in Input(n).split('\n') if s != '']
 
 
+def all_lines(n): return [s for s in Input(n).split('\n')]
+
+
 def count(iterable, fn=lambda x: x): return sum(fn(x) for x in iterable)
 
 
