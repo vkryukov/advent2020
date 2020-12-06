@@ -1,32 +1,41 @@
 from utils import *
 
 
-count = 0
-d = {}
-for line in all_lines(6):
-    if line == '':
-        count += len(d.keys())
-        d = {}
-    else:
-        for x in set(line):
-            d[x] = True
-print(count)
+def part1():
+    c = 0
+    d = {}
+    for line in all_lines(6):
+        if line == '':
+            c += len(d.keys())
+            d = {}
+        else:
+            for x in line:
+                d[x] = True
+    return c
 
 
-count = 0
-d = defaultdict(int)
-lines_processed = 0
-for line in all_lines(6):
-    if line == '':
-        for x in d.keys():
-            if d[x] == lines_processed:
-                count += 1
-        lines_processed = 0
-        d = defaultdict(int)
-    else:
-        for x in line:
-            d[x] += 1
-        lines_processed += 1
-print(count)
+def test_part1():
+    assert part1() == 6809
+
+
+def part2():
+    c = 0
+    d = defaultdict(int)
+    lines_processed = 0
+    for line in all_lines(6):
+        if line == '':
+            c += count(d.values(), lambda x: x == lines_processed)
+            lines_processed = 0
+            d = defaultdict(int)
+        else:
+            for x in line:
+                d[x] += 1
+            lines_processed += 1
+    return c
+
+
+def test_part2():
+    assert part2() == 3394
+
 
 
