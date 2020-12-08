@@ -41,7 +41,7 @@ jmp -3
 acc -99
 acc +1
 jmp -4
-acc +6""".split('\n')) == 5
+acc +6""".split('\n')) == (5, False)
 
 # print(run(read_lines(8)))
 
