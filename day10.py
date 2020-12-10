@@ -1,7 +1,9 @@
 from utils import *
 
+
 def diff(nums):
     return [nums[i] - nums[i-1] for i in range(1, len(nums))]
+
 
 nums = read_integers(10)
 jolts = [0] + sorted(nums) + [max(nums) + 3]
@@ -31,7 +33,7 @@ def conseq(n):
         return conseq_values[n]
 
 
-def number(args):
+def number(diffs):
     count = 1
     for k, g in groupby(diffs, lambda x: x):
         if k == 1:
