@@ -48,3 +48,17 @@ def test_point():
     assert len({UP, UP, DOWN, DOWN, LEFT, LEFT, RIGHT, LEFT}) == 4
     assert abs(3 * UP + 4 * LEFT) == 5
     assert (3 * UP + 7 * RIGHT + 2 * DOWN).manhattan() == (3 + 7 - 2)
+
+
+def test_rotation():
+    for key in DIRECTIONS.keys():
+        assert DIRECTIONS[key].rotate('L', 4) == DIRECTIONS[key]
+        assert DIRECTIONS[key].rotate('R', 4) == DIRECTIONS[key]
+        assert DIRECTIONS[key].rotate('L', 2) == DIRECTIONS[key].rotate('R', 2)
+        assert DIRECTIONS[key].rotate('L', 3) == DIRECTIONS[key].rotate('R', 1)
+        assert DIRECTIONS[key].rotate('L', 1) == DIRECTIONS[key].rotate('R', 3)
+
+    assert N.rotate('R') == E
+    assert N.rotate('L') == W
+    assert N.rotate('R', 2) == S
+    assert N.rotate('L', 2) == S
