@@ -24,8 +24,21 @@ class Point(namedtuple('Point', 'x y')):
     def __rmul__(self, other):
         return Point(self.x * other, self.y * other)
 
+    def rotate(self, direction, times=1):
+        x, y = self.x, self.y
+        for i in range(times):
+            if direction == 'L':
+                x, y = -y, x
+            elif direction == 'R':
+                x, y = y, -x
+            else:
+                raise ValueError(f"Not a recognized direction: '{direction}'")
+        return Point(x, y)
+
 
 UP, DOWN, LEFT, RIGHT = Point(0, 1), Point(0, -1), Point(-1, 0), Point(1, 0)
+N, S, W, E = Point(0, 1), Point(0, -1), Point(-1, 0), Point(1, 0)
+DIRECTIONS = dict(N=N, S=S, W=W, E=E)
 
 
 def test_point():
