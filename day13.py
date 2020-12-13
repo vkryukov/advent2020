@@ -54,7 +54,9 @@ def chinese_remainders(aa, nn):
 
 
 def test_chinese_reminders():
-    assert chinese_remainders([1, 2], [3, 5]) == 7
+    assert chinese_remainders([1, 2, 3, 4, 5], [3, 5, 7, 11, 13]) == 14227
+    assert chinese_remainders([1, 2, 3, 4, 5, 6], [3, 5, 7, 11, 13, 17]) == 44257
+
 
 aa = [-x[1] for x in buses]
 nn = [x[0] for x in buses]
