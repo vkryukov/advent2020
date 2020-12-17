@@ -17,7 +17,7 @@ class Cube:
 
     def surrounding(self, point):
         g = product((0, -1, 1), repeat=self.dim)
-        next(g)  # since it will be (0, ... 0)
+        next(g)  # since it will be (0, ..., 0)
         for shift in g:
             yield tuple(x + y for x, y in zip(point, shift))
 
