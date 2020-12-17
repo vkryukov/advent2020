@@ -3,6 +3,8 @@ from utils import *
 lines = Input(16).split('\n\n')
 
 rules, your_ticket, nearby_tickets = lines
+your_ticket = read_integers(your_ticket, ',')
+
 
 class Rule:
     def __init__(self, s:str):
