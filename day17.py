@@ -1,4 +1,4 @@
-from utils import *
+from utils import count as my_count, read_lines
 
 lines = read_lines(17)
 
@@ -58,22 +58,24 @@ class Cube3:
                 if line[y] == '#':
                     self.coords.add((x, y, 0, 0))
 
-    def neighboors(self, point):
-        result = self.neighboors_hash.get(point)
-        if result:
-            return result
+    @staticmethod
+    def surrounding(point):
         x, y, z, w = point
-        count = 0
         for i in (-1, 0, 1):
             for j in (-1, 0, 1):
                 for k in (-1, 0, 1):
                     for l in (-1, 0, 1):
                         if i == j == k == l == 0:
                             continue
-                        if (x+i, y+j, z+k, w + l) in self.coords:
-                            count += 1
-        self.neighboors_hash[point] = count
-        return count
+                        yield x + i, y + j, z + k, w + l
+
+    def neighboors(self, point):
+        result = self.neighboors_hash.get(point)
+        if result:
+            return result
+        c = my_count((p in self.coords) for p in Cube3.surrounding(point))
+        self.neighboors_hash[point] = c
+        return c
 
     def iterate(self):
         new_coords = set()
@@ -81,25 +83,18 @@ class Cube3:
             if 2 <= self.neighboors(point) <= 3:
                 new_coords.add(point)
 
-        checked = {}
-
+        checked = set()
         for point in self.coords:
-            for i in (-1, 0, 1):
-                for j in (-1, 0, 1):
-                    for k in (-1, 0, 1):
-                        for l in (-1, 0, 1):
-                            if i == j == k == l == 0:
-                                continue
-                            x, y, z, w = point
-                            new_point = x + i, y + j, z + k, w + l
-                            if not checked.get(new_point) and \
-                                    new_point not in self.coords and self.neighboors(new_point) == 3:
-                                new_coords.add(new_point)
-                                checked[new_point] = True
+            for new_point in Cube3.surrounding(point):
+                if new_point not in checked and new_point not in self.coords \
+                        and self.neighboors(new_point) == 3:
+                    new_coords.add(new_point)
+                checked.add(new_point)
 
         c = Cube3([])
         c.coords = new_coords
         return c
+
 
 def test_cube():
     c = Cube(""".#.
@@ -110,10 +105,11 @@ def test_cube():
 
 
 
-c = Cube3(lines)
-for _ in range(6):
-    c = c.iterate()
-    print(len(c.coords))
+def test_cube3():
+    c = Cube3(lines)
+    for _ in range(6):
+        c = c.iterate()
+    assert len(c.coords) == 2264
 
 
 
