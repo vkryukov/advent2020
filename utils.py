@@ -1,6 +1,5 @@
 # Input utilities
 from math import *
-from itertools import *
 from collections import Counter, namedtuple, defaultdict
 import pickle
 import requests
