@@ -9,10 +9,9 @@ class Cube:
         self.points = set()
         self.n_counts = {}
         self.dim = dim
-        for x in range(len(lines)):
-            line = lines[x]
-            for y in range(len(line)):
-                if line[y] == '#':
+        for x, line in enumerate(lines):
+            for y, ch in enumerate(line):
+                if ch == '#':
                     self.points.add((x, y) + (0,) * (dim - 2))
 
     def surrounding(self, point):
