@@ -46,8 +46,8 @@ def prod(iterable):
         result *= x
     return result
 
-def test_prod():
-    assert prod(range(1, 10)) == factorial(9)
+# def test_prod():
+#     assert prod(range(1, 10)) == factorial(9)
 
 
 def group_by(lst: typing.Iterable, /, key, sort_key=None) -> dict:
@@ -62,17 +62,17 @@ def group_by(lst: typing.Iterable, /, key, sort_key=None) -> dict:
     return dict(d)
 
 
-def test_group_by():
-    lst = range(10)
-    assert group_by(lst, key=lambda x: x % 2) == {0: [0, 2, 4, 6, 8], 1: [1, 3, 5, 7, 9]}
-    assert group_by(['mother', 'window', 'Mary', 'wash'], key=lambda s: s[0].lower()) == dict(
-        m=['mother', 'Mary'],
-        w=['window', 'wash']
-    )
-    assert group_by(['mother', 'wash', 'Mary', 'window'],
-                    key=lambda s: s[0].lower(),
-                    sort_key=len
-                    ) == dict(
-        m=['Mary', 'mother'],
-        w=['wash', 'window']
-    )
+# def test_group_by():
+#     lst = range(10)
+#     assert group_by(lst, key=lambda x: x % 2) == {0: [0, 2, 4, 6, 8], 1: [1, 3, 5, 7, 9]}
+#     assert group_by(['mother', 'window', 'Mary', 'wash'], key=lambda s: s[0].lower()) == dict(
+#         m=['mother', 'Mary'],
+#         w=['window', 'wash']
+#     )
+#     assert group_by(['mother', 'wash', 'Mary', 'window'],
+#                     key=lambda s: s[0].lower(),
+#                     sort_key=len
+#                     ) == dict(
+#         m=['Mary', 'mother'],
+#         w=['wash', 'window']
+#     )
