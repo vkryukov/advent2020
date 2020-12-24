@@ -68,19 +68,19 @@ def test_part1():
 games = defaultdict(dict)
 
 
-def play(round, p1, p2):
+def play(rnd, p1, p2):
     while True:
-        if games[round].get((p1, p2)):
+        if games[rnd].get((p1, p2)):
             return p1 + p2, tuple()
         if not p1 or not p2:
             return p1, p2
-        games[round][((p1, p2))] = True
+        games[rnd][(p1, p2)] = True
         c1, c2 = p1[0], p2[0]
         first_won = False
         if c1 <= len(p1)-1 and c2 <= len(p2) - 1:
             # Recursive combat
-            games[round+1] = {}
-            rp1, rp2 = play(round+1, p1[1:c1+1], p2[1:c2+1])
+            games[rnd + 1] = {}
+            rp1, rp2 = play(rnd + 1, p1[1:c1 + 1], p2[1:c2 + 1])
             if not rp2:
                 first_won = True
         else:
