@@ -15,14 +15,17 @@ class Point(namedtuple('Point', 'x y')):
     def __add__(self, other):
         return Point(self.x+other.x, self.y+other.y)
 
-    def __hash__(self):
-        return hash((self.x, self.y))
-
     def __mul__(self, other):
         return Point(self.x * other, self.y * other)
 
     def __rmul__(self, other):
         return Point(self.x * other, self.y * other)
+
+    def __hash__(self):
+        return hash((round(self.x, 4), round(self.y, 4)))
+
+    def __eq__(self, other):
+        return abs(self.x - other.x) < 0.0001 and abs(self.y - other.y) < 0.0001
 
     def rotate(self, direction, times=1):
         x, y = self.x, self.y
